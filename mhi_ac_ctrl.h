@@ -210,7 +210,7 @@ public:
                 this->mode = climate::CLIMATE_MODE_HEAT;
                 break;
             default:
-                ESP_LOGD("mhi_ac_ctrl", "unknown status mode value %i", value);
+                ESP_LOGD(TAG, "unknown status mode value %i", value);
             }
             this->publish_state();
             break;
@@ -440,13 +440,13 @@ public:
             room_temp_api_timeout_ms = millis();  // reset timeout
             byte tmp = value*4+61;
             mhi_ac_ctrl_core.set_troom(value*4+61);
-            ESP_LOGD("mhi_ac_ctrl", "set room_temp_api: %f %i %i", value, (byte)(value*4+61), (byte)tmp);
+            ESP_LOGD(TAG, "set room_temp_api: %f %i %i", value, (byte)(value*4+61), (byte)tmp);
         }
     }
 
     void set_vanes(int value) {
         mhi_ac_ctrl_core.set_vanes(value);
-        ESP_LOGD("mhi_ac_ctrl", "set vanes: %i", value);
+        ESP_LOGD(TAG, "set vanes: %i", value);
     }
 
 protected:
