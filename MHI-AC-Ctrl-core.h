@@ -91,6 +91,12 @@ class CallbackInterface_Status {
 };
 
 class MHI_AC_Ctrl_Core {
+  public:
+    // pins
+    byte SCK_PIN;
+    byte MOSI_PIN;
+    byte MISO_PIN;
+
   private:
     // old status
     byte status_power_old;
