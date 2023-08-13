@@ -121,6 +121,10 @@ public:
         energy_used_.set_unit_of_measurement("kWh");
         energy_used_.set_accuracy_decimals(2);
 
+        mhi_ac_ctrl_core.SCK_PIN = id(SCK_PIN);
+        mhi_ac_ctrl_core.MOSI_PIN = id(MOSI_PIN);
+        mhi_ac_ctrl_core.MISO_PIN = id(MISO_PIN);
+        
         mhi_ac_ctrl_core.MHIAcCtrlStatus(this);
         mhi_ac_ctrl_core.init();
     }
@@ -130,12 +134,12 @@ public:
         if(millis() - room_temp_api_timeout_ms >= id(room_temp_api_timeout)*1000) {
             mhi_ac_ctrl_core.set_troom(0xff);  // use IU temperature sensor
             room_temp_api_timeout_ms = millis();
-            ESP_LOGD("mhi_ac_ctrl", "did not receive a room_temp_api value, using IU temperature sensor");
+            ESP_LOGD(TAG, "did not receive a room_temp_api value, using IU temperature sensor");
         }
 
         int ret = mhi_ac_ctrl_core.loop(100);
         if (ret < 0)
-            ESP_LOGW("mhi_ac_ctrl", "mhi_ac_ctrl_core.loop error: %i", ret);
+            ESP_LOGW(TAG, "mhi_ac_ctrl_core.loop error: %i", ret);
     }
 
     void dump_config() override
@@ -150,7 +154,7 @@ public:
     void cbiStatusFunction(ACStatus status, int value) override
     {
         static int mode_tmp = 0xff;
-        ESP_LOGD("mhi_ac_ctrl", "received status=%i value=%i power=%i", status, value, this->power_);
+        ESP_LOGD(TAG, "received status=%i value=%i power=%i", status, value, this->power_);
 
         if (this->power_ == power_off) {
             // Workaround for status after reboot
