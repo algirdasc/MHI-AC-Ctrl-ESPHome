@@ -121,13 +121,13 @@ public:
         energy_used_.set_unit_of_measurement("kWh");
         energy_used_.set_accuracy_decimals(2);
 
-        mhi_ac_ctrl_core.SCK_PIN = id(SCK_PIN);
-        mhi_ac_ctrl_core.MOSI_PIN = id(MOSI_PIN);
-        mhi_ac_ctrl_core.MISO_PIN = id(MISO_PIN);
+        mhi_ac_ctrl_core.set_SCK_PIN(id(SCK_PIN));
+        mhi_ac_ctrl_core.set_MOSI_PIN(id(MOSI_PIN));
+        mhi_ac_ctrl_core.set_MISO_PIN(id(MISO_PIN));
         
         mhi_ac_ctrl_core.MHIAcCtrlStatus(this);
         mhi_ac_ctrl_core.init();
-        mhi_ac_ctrl_core.set_frame_size(frameSize); // switch to framesize 33 (like WF-RAC). Only 20 or 33 possible
+        mhi_ac_ctrl_core.set_frame_size(id(FRAME_SIZE)); // switch to framesize 33 (like WF-RAC). Only 20 or 33 possible
     }
 
     void loop() override

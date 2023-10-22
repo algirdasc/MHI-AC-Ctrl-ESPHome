@@ -112,13 +112,12 @@ class CallbackInterface_Status {
 };
 
 class MHI_AC_Ctrl_Core {
-  public:
+  private:
     // pins
     byte SCK_PIN;
     byte MOSI_PIN;
     byte MISO_PIN;
 
-  private:
     // old status
     byte status_power_old;
     byte status_mode_old;
@@ -193,5 +192,7 @@ class MHI_AC_Ctrl_Core {
     void set_3Dauto(AC3Dauto Dauto);      // set the requested 3D auto mode
     void set_vanesLR(uint vanesLR);       // set the vanes vertical position
 
-
+    void set_SCK_PIN(byte pin) { SCK_PIN = pin; };
+    void set_MOSI_PIN(byte pin) { MOSI_PIN = pin; };
+    void set_MISO_PIN(byte pin) { MISO_PIN = pin; };
 };
