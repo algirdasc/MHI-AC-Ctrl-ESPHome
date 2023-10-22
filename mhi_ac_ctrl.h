@@ -127,7 +127,7 @@ public:
         
         mhi_ac_ctrl_core.MHIAcCtrlStatus(this);
         mhi_ac_ctrl_core.init();
-        mhi_ac_ctrl_core.set_frame_size(33); // switch to framesize 33 (like WF-RAC). Only 20 or 33 possible
+        mhi_ac_ctrl_core.set_frame_size(frameSize); // switch to framesize 33 (like WF-RAC). Only 20 or 33 possible
     }
 
     void loop() override
@@ -521,20 +521,20 @@ public:
 
     void set_vanesLR(int value) {
         mhi_ac_ctrl_core.set_vanesLR(value);
-        ESP_LOGD("mhi_ac_ctrl", "set vanes Left Right: %i", value);
+        ESP_LOGD(TAG, "set vanes Left Right: %i", value);
     }
 
     void set_3Dauto(bool value) {
-        // ESP_LOGD("mhi_ac_ctrl", "set 3D auto: %s", value);
+        // ESP_LOGD(TAG, "set 3D auto: %s", value);
         if (value){
-            ESP_LOGD("mhi_ac_ctrl", "set 3D auto: on");
+            ESP_LOGD(TAG, "set 3D auto: on");
             mhi_ac_ctrl_core.set_3Dauto(AC3Dauto::Dauto_on); // Set swing to 3Dauto
         }
         else {
-            ESP_LOGD("mhi_ac_ctrl", "set 3D auto: off");
+            ESP_LOGD(TAG, "set 3D auto: off");
             mhi_ac_ctrl_core.set_3Dauto(AC3Dauto::Dauto_off); // Set swing to 3Dauto
         }
-        ESP_LOGD("mhi_ac_ctrl", "set vanes Left Right: %i", value);
+        ESP_LOGD(TAG, "set vanes Left Right: %i", value);
     }
 
 protected:
