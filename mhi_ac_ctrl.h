@@ -139,7 +139,7 @@ public:
         }
 
         int ret = mhi_ac_ctrl_core.loop(100);
-        if (ret < 0)
+        if (ret < -1)
             ESP_LOGW(TAG, "mhi_ac_ctrl_core.loop error: %i", ret);
     }
 
